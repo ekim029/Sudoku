@@ -40,29 +40,47 @@ class Puzzle:
 
 
     def placeVal(self, val, row, col):
-        this.values[row][col] = val
-        this.subgridHasValue[row / SUBGRID_DIM][col / SUBGRID_DIM][val] = True
-        this.rowContains[row][val] = True
-        this.columnContains[col][val] = True
+        self.values[row][col] = val
+        self.subgridHasValue[row / SUBGRID_DIM][col / SUBGRID_DIM][val] = True
+        self.rowContains[row][val] = True
+        self.columnContains[col][val] = True
 
 
     def removeVal(self, val, row, col):
-        this.values[row][col] = 0
-        this.subgridHasValue[row / SUBGRID_DIM][col / SUBGRID_DIM][val] = False
-        this.rowContains[row][val] = False
-        this.columnContains[col][val] = False
+        self.values[row][col] = 0
+        self.subgridHasValue[row / SUBGRID_DIM][col / SUBGRID_DIM][val] = False
+        self.rowContains[row][val] = False
+        self.columnContains[col][val] = False
+
 
     def readFrom(self, input):
-        pass
+        i = 0
+        for line in input:
+            j = 0
+            for val in line.split(" "): 
+                self.placeVal(val, i, j)
+                if val != 0:
+                    self.valIsFied[i][j] = True
+                j += 1
+            i += 1
+
 
     def display(self):
-        pass
+        for i in range(DIM):
+            self.printRowSeparator()
+            for j in range(DIM):
+                print("|")
+                if self.values[i][j] == 0:
+                    print("   ")
+                else:
+                    print(" " + self.values[i][j] + " ")
+            print("|")
+
+        self.printRowSeparator()
+
 
     def printRowSeparator(self):
         for i in range(DIM):
             print("----")
         print("-\n")
-
-
-    
     
