@@ -38,11 +38,19 @@ class Puzzle:
         foundSol = self.solveRB(0)
         return foundSol
 
+
     def placeVal(self, val, row, col):
-        pass
+        this.values[row][col] = val
+        this.subgridHasValue[row / SUBGRID_DIM][col / SUBGRID_DIM][val] = True
+        this.rowContains[row][val] = True
+        this.columnContains[col][val] = True
+
 
     def removeVal(self, val, row, col):
-        pass
+        this.values[row][col] = 0
+        this.subgridHasValue[row / SUBGRID_DIM][col / SUBGRID_DIM][val] = False
+        this.rowContains[row][val] = False
+        this.columnContains[col][val] = False
 
     def readFrom(self, input):
         pass
@@ -51,7 +59,9 @@ class Puzzle:
         pass
 
     def printRowSeparator(self):
-        pass
+        for i in range(DIM):
+            print("----")
+        print("-\n")
 
 
     
